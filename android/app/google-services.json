@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878826370536",
+    "project_id": "clever-tai-nguyen-e3507",
+    "storage_bucket": "clever-tai-nguyen-e3507.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878826370536:android:3d92072d43d48cb1c9605d",
+        "android_client_info": {
+          "package_name": "com.lab_3_2024801030129_nguyenvantai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBENIyweTZa7zwofu9XoWFQH32l_jiQXLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
