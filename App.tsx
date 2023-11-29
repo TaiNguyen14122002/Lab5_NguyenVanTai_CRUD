@@ -7,6 +7,7 @@ import ForgotPasswordScreen from './Screens/ForgotPasswordScreen'
 import HomeScreen from './Screens/HomeScreen'
 import { AuthenticatedUserProvider } from './providers'
 import RootNavigator from './navigation/RootNavigator'
+import AddProductScreen from './Screens/AddProduct'
 // import { StyleSheet, Text, View } from 'react-native'
 // import firestore from '@react-native-firebase/firestore'
 
@@ -26,6 +27,7 @@ const App = () => {
         <RootNavigator/>
       </SafeAreaProvider>
     </AuthenticatedUserProvider>
+    
   )
 }
 

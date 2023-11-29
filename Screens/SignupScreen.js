@@ -33,7 +33,7 @@ export const SignupScreen = ({navigation}) => {
     <View isSafe style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid={true}>
         <View style={styles.logoContainer}>
-            <Logo uri={Images.logo}/>
+            
             <Text style={styles.screenTitle}> Create a new account!</Text>
         </View>
         <Formik initialValues={{
@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12
     },
     logoContainer:{
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 100
     },
     screenTitle:{
         fontSize: 32,
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 8,
-        backgroundColor: Colors.orange,
+        backgroundColor: '#428bca',
         padding: 10,
         borderRadius: 8
     },

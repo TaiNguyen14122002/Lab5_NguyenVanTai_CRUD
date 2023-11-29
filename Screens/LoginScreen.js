@@ -9,6 +9,13 @@ import { useTogglePasswordVisibility } from '../hooks'
 import { loginValidationSchema, signupValidationSchema } from '../utils'
 import ForgotPasswordScreen from './ForgotPasswordScreen'
 import SignupScreen from './SignupScreen'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
+const LeftIcon = () => {
+    return (
+        <Icon name="envelope-o" size={24} color="#fff"/>
+    )
+}
 
 const LoginScreen = ({navigation}) => {
     const [errorState, setErrorState] = useState('');
@@ -31,8 +38,8 @@ const LoginScreen = ({navigation}) => {
         <View isSafe style={styles.container}>
             <KeyboardAwareScrollView enableOnAndroid={true}>
                 <View style={styles.logoContainer}>
-                    <Logo uri={Images.logo}/>
-                    <Text style={styles.screenTitle}>Welcome back!</Text>
+                    
+                    <Text style={styles.screenTitle}>Login</Text>
                 </View>
                 <Formik initialValues={{
                     email: '',
@@ -42,6 +49,7 @@ const LoginScreen = ({navigation}) => {
                 onSubmit={values => handleLogin(values)}
                 >
                     {({
+                        leftIconName,
                         values,
                         touched,
                         errors,
@@ -52,7 +60,7 @@ const LoginScreen = ({navigation}) => {
                         <>
                         <TextInput
                             name='email'
-                            leftIconName='email'
+                            leftIconName='key-variant'
                             placeholder='Enter email'
                             autoCapitalize='none'
                             keyboardTyoe='email-address'
@@ -113,17 +121,20 @@ export default LoginScreen;
 const styles = StyleSheet.create({
     container:{
         flex:1,
+        justifyContent: 'center',
         backgroundColor: Colors.white,
-        paddingHorizontal: 12
+        paddingHorizontal: 30,
     },
     logoContainer:{
-        alignItems:'center'
+        alignItems:'center',
+        marginTop: 150
     },
     screenTitle:{
-        fontSize: 32,
+        fontSize: 40,
         fontWeight: '700',
         color: Colors.black,
-        paddingTop: 20
+        paddingTop: 20,
+        color: '#428bca'
     },
     footer:{
         backgroundColor: Colors.white,
@@ -141,7 +152,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 8,
-        backgroundColor: Colors.orange,
+        backgroundColor: '#428bca',
         padding: 10,
         borderRadius: 8
     },
