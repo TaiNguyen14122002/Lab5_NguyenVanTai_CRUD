@@ -4,11 +4,15 @@ import firestore from '@react-native-firebase/firestore';
 import { Text } from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
 import moment from 'moment';
+import ImagePicker from 'react-native-image-picker';
 
-const AddProductScreen = ({navigation}) => {
+
+
+const AddProductScreen = ({ navigation }) => {
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const ref = firestore().collection('Product');
+  const [image, setImage] = useState(null);
 
   //Nhan thoi gian thuc
   const [currentDateTime, setCurrentDateTime] = useState('');
@@ -23,25 +27,21 @@ const AddProductScreen = ({navigation}) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Xử lý để định dạng giá trị nhập vào (ví dụ: thêm dấu ',' sau mỗi 3 chữ số)
-  const [amount, setAmount] = useState('');
-
-  const formatCurrency = (value) => {
-    
-    const formattedValue = parseFloat(value.replace(/,/g, '')).toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
+  //Nhận hình ảnh từ thư mục máy tính
+  const chooseImage = () => {
+    ImagePicker.showImagePicker({}, (response) => {
+      if (!response.didCancel && !response.error) {
+        setImage(response.uri);
+      }
     });
-    return formattedValue;
   };
-
 
   async function addProduct() {
     await ref.add({
-        ServiceName: productName,
-        Price: productPrice,
-        Creator: auth().currentUser.email,
-        Time: currentDateTime
+      ServiceName: productName,
+      Price: productPrice,
+      Creator: auth().currentUser.email,
+      Time: currentDateTime
     });
     console.log('Thêm thành công Product');
     setProductName('');
@@ -49,29 +49,37 @@ const AddProductScreen = ({navigation}) => {
     navigation.navigate('HomeScreen');
   }
 
+
+
   return (
-    <View style={{flex: 1, paddingHorizontal: 30,}}>
-        <View style={{marginTop: 20}}>
-            <Text style={{ fontWeight: 'bold'}}>Service name *</Text>
-            <TextInput
-            placeholder="  Input a service name"
-            onChangeText={(text) => setProductName(text)}
-            value={productName}
-            autoCorrect={false}
-            style={{ borderWidth: 1, borderRadius: 10, borderColor: '#ddd', marginTop: 5, backgroundColor: '#ddd'}}
+    <View style={{ flex: 1, paddingHorizontal: 30, }}>
+      <View style={{ marginTop: 20 }}>
+        <Text style={{ fontWeight: 'bold' }}>Service name *</Text>
+        <TextInput
+          placeholder="  Input a service name"
+          onChangeText={(text) => setProductName(text)}
+          value={productName}
+          autoCorrect={false}
+          style={{ borderWidth: 1, borderRadius: 10, borderColor: '#ddd', marginTop: 5, backgroundColor: '#ddd' }}
         />
-        </View>
-        <View style={{marginTop: 20, marginBottom: 20}}>
-            <Text style={{ fontWeight: 'bold'}}>Price *</Text>
-            <TextInput
-            placeholder="  Giá sản phẩm"
-            onChangeText={(number) => setProductPrice(number)}
-            value={productPrice}
-            keyboardType="numeric"
-            style={{ borderWidth: 1, borderRadius: 10, borderColor: '#ddd', marginTop: 5, backgroundColor: '#ddd'}}
+      </View>
+      <View style={{ marginTop: 20, marginBottom: 20 }}>
+        <Text style={{ fontWeight: 'bold' }}>Price *</Text>
+        <TextInput
+          placeholder="  Giá sản phẩm"
+          onChangeText={(number) => setProductPrice(number)}
+          value={productPrice}
+          keyboardType="numeric"
+          style={{ borderWidth: 1, borderRadius: 10, borderColor: '#ddd', marginTop: 5, backgroundColor: '#ddd' }}
         />
-        </View>
-      
+      </View>
+
+      <View style={{marginBottom: 20 }}>
+      <Text style={{ fontWeight: 'bold' }}>Price *</Text>
+        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <Button title="Chọn ảnh" onPress={chooseImage} />
+      </View>
+
       <Button title="Thêm sản phẩm" onPress={addProduct} />
     </View>
   );

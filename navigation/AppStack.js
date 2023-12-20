@@ -11,6 +11,7 @@ import { ProductDetailScreen } from '../Screens/ProductDetail'
 import {  } from 'react-native-paper'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { UpdateProduct } from '../Screens/UpdateProduct'
 
 
 const Tab = createStackNavigator();
@@ -29,6 +30,11 @@ export const AppStack = () => {
           ),
         }}/>
         <Tab.Screen name='ProductDetail' component={ProductDetailScreen} ptions={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name='home' color={color} size={size} />
+          ),
+        }}/>
+        <Tab.Screen name='UpdateProduct' component={UpdateProduct} ptions={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='home' color={color} size={size} />
           ),
